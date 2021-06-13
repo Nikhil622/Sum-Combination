@@ -1,0 +1,26 @@
+void fun(int idx,int sum,vector<int>&v,vector<int>&vt,vector<vector<int>>&res)
+    {   if(sum<0)
+          return;
+        if(sum==0)
+         {   res.push_back(vt);
+             return;
+         }
+        
+        for(int i=idx;i<v.size();++i)
+        {  if(sum-v[i]<0)
+              return;
+           if(idx<i && v[i]==v[i-1])
+               continue;
+           vt.push_back(v[i]);
+           fun(i+1,sum-v[i],v,vt,res);
+           vt.pop_back();
+        }
+        
+    }
+    vector<vector<int>> combinationSum2(vector<int>& v, int sum) {
+         vector<vector<int>>res;
+         vector<int>vt;
+         sort(v.begin(),v.end());
+         fun(0,sum,v,vt,res);
+         return res;
+    }
