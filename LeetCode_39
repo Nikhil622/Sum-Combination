@@ -1,0 +1,22 @@
+ void fun(int idx,int sum,vector<int>&v,vector<int>&vt,vector<vector<int>>&res)
+    {  if(sum<0)
+          return;
+       if(sum==0)
+       {  res.push_back(vt);
+          return; 
+       }
+       for(int i=idx;i<v.size();++i)
+       {  if(sum-v[i]<0)
+             return;
+          vt.push_back(v[i]);
+          fun(i,sum-v[i],v,vt,res);
+          vt.pop_back();
+       }
+    }
+ vector<vector<int>> combinationSum(vector<int>&v, int sum){
+        sort(v.begin(),v.end());
+        vector<vector<int>>res;
+        vector<int>vt;
+        fun(0,sum,v,vt,res);
+        return res;
+  }
